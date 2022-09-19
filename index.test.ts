@@ -2,8 +2,6 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import deepLock from './index.js';
 
-console.log('test=================');
-
 // Credits for some test https://github.com/snovakovic/js-flock
 
 describe('deepLock', () => {
