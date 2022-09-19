@@ -2,12 +2,12 @@
 
 Usage:
 
-1. Install package `npm install deep-lock`
+1. Install package `yarn add @tanzanite/deep-lock`
 2. Usage:
 
-```
-import deepLock from 'deep-lock'
+```ts
+import deepLock from '@tanzanite/deep-lock';
 
-cosnt obj = { x: 1 } // { x: number }
-const freezed = deepLock({ x: 1 }) // { readonly x: number }
+const obj = { x: 1 }; // { x: number }
+const freezed = deepLock({ x: 1 }); // { readonly x: number }
 ```
