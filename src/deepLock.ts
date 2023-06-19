@@ -66,7 +66,7 @@ export function deepLock(obj: Record<any, any>, options?: { action?: Actions }) 
 function lock(obj: Record<any, any>, action: Actions, locked = new Set()) {
 	if (locked.has(obj)) return obj; // Prevent circular reference
 
-	// @ts-ignore incompatible type signatures
+	// @ts-expect-error incompatible type signatures
 	Object[action](obj);
 	locked.add(obj);
 

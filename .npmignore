@@ -1,6 +1,0 @@
-node_modules
-.yarn
-.yarnrc.yml
-.gitignore
-index.test.ts
-dist/*.test.*

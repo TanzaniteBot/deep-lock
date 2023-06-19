@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import deepLock from './index.js';
+import deepLock from '../src/deepLock.js';
 
 // Credits for some test https://github.com/snovakovic/js-flock
 
@@ -28,17 +28,6 @@ describe('deepLock', () => {
 
 	const regExpNotExt = /Cannot add property .* object is not extensible/;
 
-	const assertError = (func: () => void, regex: RegExp) => {
-		try {
-			func();
-		} catch (error: any) {
-			assert.match(error.message, regex);
-			return;
-		}
-
-		assert(false);
-	};
-
 	let obj: any;
 	let refToA: any;
 	let refToB: any;
@@ -60,9 +49,7 @@ describe('deepLock', () => {
 		it('Should throw for invalid action', () => {
 			beforeEach();
 
-			assertError(() => {
-				deepLock(obj, { action: 'a' as any });
-			}, /Invalid action: /);
+			assert.throws(() => deepLock(obj, { action: 'a' as any }), /Invalid action: /);
 		});
 
 		it('Should freeze and not throw on any types', () => {
@@ -97,9 +84,7 @@ describe('deepLock', () => {
 			assert.equal(Object.isFrozen(obj.arrObj[0].x), true);
 			assert.equal(Object.isFrozen(obj.set.p1.p2), true);
 
-			assertError(() => {
-				obj.x = 1;
-			}, regExpNotExt);
+			assert.throws(() => (obj.x = 1), regExpNotExt);
 		});
 
 		it('Should freeze object without prototype', () => {
@@ -115,9 +100,7 @@ describe('deepLock', () => {
 			assert.equal(Object.isFrozen(obj.x), true);
 			assert.equal(Object.isFrozen(obj.obj2), true);
 
-			assertError(() => {
-				obj.y = 1;
-			}, regExpNotExt);
+			assert.throws(() => (obj.y = 1), regExpNotExt);
 		});
 
 		it('Should deep freeze nested objects', () => {
